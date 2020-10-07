@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home component matches the rendered snapshot with default props 1`] = `
+<div
+  className="page"
+>
+  <div
+    className="page-wrapper"
+  >
+    <div
+      className="header"
+    >
+      <img
+        alt="Taskly"
+        src="./images/taskly-logo.svg"
+      />
+      <div
+        className="header-buttons"
+      >
+        <div
+          className="header-button-item"
+        >
+          Services
+        </div>
+        <div
+          className="header-button-item"
+        >
+          About Us
+        </div>
+        <div
+          className="header-button-item"
+        >
+          Contact
+        </div>
+      </div>
+    </div>
+    <div
+      className="main"
+    >
+      <h1>
+        Get a virtual assistant. Organize like never before.
+      </h1>
+      <RedButton
+        className="login-button"
+        handleOnClick={[MockFunction]}
+        isLoading={false}
+        text="Login with Proton"
+      />
+      <div
+        className="app-store-badges"
+      >
+        <img
+          alt="Download on Google"
+          src="./images/google-badge.png"
+        />
+        <img
+          alt="Download on Apple"
+          src="./images/apple-badge.png"
+        />
+      </div>
+    </div>
+    <RedBackground
+      bottom="auto"
+      left="auto"
+      right="-20px"
+      side="right"
+      top="20%"
+    >
+      <img
+        alt="Peeps!"
+        src="./images/peeps.png"
+      />
+    </RedBackground>
+  </div>
+</div>
+`;
+
+exports[`Home component matches the rendered snapshot with isLoggingIn true and smaller window width 1`] = `
+<div
+  className="page"
+>
+  <div
+    className="page-wrapper"
+  >
+    <div
+      className="header"
+    >
+      <img
+        alt="Taskly"
+        src="./images/taskly-logo.svg"
+      />
+      <div
+        className="header-buttons"
+      >
+        <HamburgerIcon />
+      </div>
+    </div>
+    <div
+      className="main"
+    >
+      <h1>
+        Get a virtual assistant. Organize like never before.
+      </h1>
+      <RedButton
+        className="login-button"
+        handleOnClick={[MockFunction]}
+        isLoading={true}
+        text="Login with Proton"
+      />
+      <div
+        className="app-store-badges"
+      >
+        <img
+          alt="Download on Google"
+          src="./images/google-badge.png"
+        />
+        <img
+          alt="Download on Apple"
+          src="./images/apple-badge.png"
+        />
+      </div>
+    </div>
+    <RedBackground
+      bottom="auto"
+      left="auto"
+      right="-20px"
+      side="right"
+      top="20%"
+    >
+      <img
+        alt="Peeps!"
+        src="./images/peeps.png"
+      />
+    </RedBackground>
+  </div>
+</div>
+`;

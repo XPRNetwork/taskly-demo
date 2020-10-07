@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tasks component matches the rendered snapshot 1`] = `
+<LoggedInLayout
+  avatar=""
+  logout={[MockFunction]}
+  mainImageUrl="./images/smiling-man-bust.png"
+  openConfirmModal={null}
+>
+  <h1>
+    Thanks, now let's get started!
+  </h1>
+  <div
+    className="description"
+  >
+    What can we help you with? Add the tasks below that you would like help with.
+  </div>
+  <input
+    className="task-item"
+    placeholder="New Task"
+  />
+  <div
+    className="description add-task"
+  >
+    <span>
+      Add another task
+    </span>
+    <PlusIcon />
+  </div>
+  <RedButton
+    className="finish-button"
+    handleOnClick={[Function]}
+    isLoading={false}
+    text="Finish"
+  />
+</LoggedInLayout>
+`;

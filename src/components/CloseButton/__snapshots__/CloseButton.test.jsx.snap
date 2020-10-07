@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CloseButton component matches the rendered snapshot 1`] = `
+<div
+  className="close-button"
+  onClick={[MockFunction]}
+>
+  <CloseIcon
+    className=""
+    fill="#000"
+    opacity="1.0"
+    viewBox="0 0 14 14"
+    width="14px"
+  />
+</div>
+`;

@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CompletedTask component matches the rendered snapshot 1`] = `
+<div
+  className="completed-task"
+>
+  <CheckIcon />
+  <span>
+    test
+  </span>
+</div>
+`;
