@@ -8,7 +8,6 @@ class HomeContainer extends React.Component {
 
     this.state = {
       windowWidth: 0,
-      isLoggingIn: false
     }
   }
 
@@ -27,18 +26,16 @@ class HomeContainer extends React.Component {
       this.setState({ isLoggingIn: true });
       const { auth, accountData } = await ProtonSDK.login();
       setLoggedInState(auth.actor, auth.permission, accountData);
-      this.setState({ isLoggingIn: false });
     } catch (e) {
-      this.setState({ isLoggingIn: false });
       console.error(e);
     }
   }
 
   render() {
-    const { windowWidth, isLoggingIn } = this.state;
+    const { windowWidth } = this.state;
 
     return(
-      <Home openLoginModal={this.generateLoginRequest} windowWidth={windowWidth} isLoggingIn={isLoggingIn} />
+      <Home openLoginModal={this.generateLoginRequest} windowWidth={windowWidth} />
     );
   }
 }
