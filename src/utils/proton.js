@@ -13,7 +13,7 @@ class ProtonSDK {
 
   login = async () => {
     try {
-      this.link = await ConnectWallet({ chainId: this.chainId, endpoints: this.endpoints, scheme: process.env.REACT_APP_SCHEME }, { requestAccount: this.requestAccount }, this.appName, TasklyLogo);
+      this.link = await ConnectWallet({ chainId: this.chainId, endpoints: this.endpoints }, { requestAccount: this.requestAccount }, this.appName, TasklyLogo);
       const { session } = await this.link.login(this.appName);
       this.session = session;
       localStorage.setItem('savedUserAuth', JSON.stringify(session.auth));
@@ -45,7 +45,7 @@ class ProtonSDK {
     if (savedUserAuth) {
       try {
         this.link = await ConnectWallet(
-          { chainId: this.chainId, endpoints: this.endpoints, scheme: process.env.REACT_APP_SCHEME },
+          { chainId: this.chainId, endpoints: this.endpoints },
           { requestAccount: this.requestAccount },
           this.appName,
           TasklyLogo,
