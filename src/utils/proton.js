@@ -1,4 +1,5 @@
-import { ConnectProton } from '@protonprotocol/proton-web-sdk'
+import { ConnectWallet } from '@protonprotocol/proton-web-sdk'
+import TasklyLogo from '../taskly-logo.svg'
 
 class ProtonSDK {
   constructor() {
@@ -11,8 +12,8 @@ class ProtonSDK {
   }
 
   login = async () => {
-    this.link = ConnectProton({ chainId: this.chainId, endpoints: this.endpoints, scheme: process.env.REACT_APP_SCHEME }, { requestAccount: this.requestAccount });
     try {
+      this.link = await ConnectWallet({ chainId: this.chainId, endpoints: this.endpoints }, { requestAccount: this.requestAccount }, this.appName, TasklyLogo);
       const { session } = await this.link.login(this.appName);
       this.session = session;
       localStorage.setItem('savedUserAuth', JSON.stringify(session.auth));
@@ -42,11 +43,21 @@ class ProtonSDK {
   restoreSession = async () => {
     const savedUserAuth = JSON.parse(localStorage.getItem('savedUserAuth'));
     if (savedUserAuth) {
-      this.link = ConnectProton({ chainId: this.chainId, endpoints: this.endpoints, scheme: process.env.REACT_APP_SCHEME }, { requestAccount: this.requestAccount });
-      const result = await this.link.restoreSession(this.appName, savedUserAuth);
-      if (result) {
-        this.session = result;
-        return { auth: this.session.auth, accountData: this.session.accountData[0] };
+      try {
+        this.link = await ConnectWallet(
+          { chainId: this.chainId, endpoints: this.endpoints },
+          { requestAccount: this.requestAccount },
+          this.appName,
+          TasklyLogo,
+          false
+        );
+        const result = await this.link.restoreSession(this.appName, savedUserAuth);
+        if (result) {
+          this.session = result;
+          return { auth: this.session.auth, accountData: this.session.accountData[0] };
+        }
+      } catch(e) {
+        return e;
       }
     }
     return { auth: { actor: '', permission: '' }, accountData: {}};
