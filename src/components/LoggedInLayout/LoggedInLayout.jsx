@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { RedBackground } from "../index";
-import "./LoggedInLayout.sass";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { RedBackground } from '../index';
+import './LoggedInLayout.sass';
 
 class LoggedInLayout extends React.Component {
   constructor(props) {
@@ -14,12 +14,12 @@ class LoggedInLayout extends React.Component {
 
   componentDidMount() {
     this.updateWindowWidth();
-    window.addEventListener("resize", this.updateWindowWidth);
+    window.addEventListener('resize', this.updateWindowWidth);
   }
 
   updateWindowWidth = () => {
     this.setState({ windowWidth: window.innerWidth });
-  };
+  }
 
   render() {
     const { children, mainImageUrl, avatar, logout } = this.props;
@@ -73,6 +73,6 @@ LoggedInLayout.propTypes = {
 };
 
 LoggedInLayout.defaultProps = {
-  avatar: "",
+  avatar: '',
   openConfirmModal: null,
 };
