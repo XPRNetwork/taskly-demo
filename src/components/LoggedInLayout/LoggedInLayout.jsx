@@ -14,7 +14,7 @@ class LoggedInLayout extends React.Component {
 
   componentDidMount() {
     this.updateWindowWidth();
-    window.addEventListener('resize', this.updateWindowWidth)
+    window.addEventListener('resize', this.updateWindowWidth);
   }
 
   updateWindowWidth = () => {
@@ -22,18 +22,24 @@ class LoggedInLayout extends React.Component {
   }
 
   render() {
-    const {children, mainImageUrl, avatar, logout} = this.props;
+    const { children, mainImageUrl, avatar, logout } = this.props;
     const { windowWidth } = this.state;
+
     return (
       <div className="page">
         <div className="page-wrapper">
           <div className="header">
-            { windowWidth > 700 ? (<img src="./images/taskly-logo-white.svg" alt="Taskly" />)
-              : (<img src="./images/taskly-logo.svg" alt="Taskly" />)
-            }
+            {windowWidth > 700 ? (
+              <img src="./images/taskly-logo-white.svg" alt="Taskly" />
+            ) : (
+              <img src="./images/taskly-logo.svg" alt="Taskly" />
+            )}
             <div
               style={{
-                backgroundImage: `url('data:image/jpeg;base64,${avatar}')`,
+                backgroundImage:
+                  avatar !== ""
+                    ? `url('data:image/jpeg;base64,${avatar}')`
+                    : `url('./images/default-avatar.png')`,
               }}
               alt="avatar"
               className="header-avatar"
@@ -44,7 +50,11 @@ class LoggedInLayout extends React.Component {
             <div className="content">
               {children}
               <RedBackground side="left" bottom="-5px">
-                <img src={mainImageUrl} alt="Smiling" className="account-image" />
+                <img
+                  src={mainImageUrl}
+                  alt="Smiling"
+                  className="account-image"
+                />
               </RedBackground>
             </div>
           </div>
@@ -60,9 +70,9 @@ LoggedInLayout.propTypes = {
   avatar: PropTypes.string,
   openConfirmModal: PropTypes.func,
   logout: PropTypes.func.isRequired,
-}
+};
 
 LoggedInLayout.defaultProps = {
   avatar: '',
   openConfirmModal: null,
-}
+};
