@@ -5,7 +5,7 @@ class ProtonSDK {
   constructor() {
     this.chainId = process.env.REACT_APP_CHAIN_ID;
     this.endpoints = [process.env.REACT_APP_CHAIN_ENDPOINT]; // Multiple for fault tolerance
-    this.appName = 'Taskly';
+    this.appName = 'taskly';
     this.requestAccount = 'taskly'; // optional
     this.session = null;
     this.link = null;
@@ -14,13 +14,13 @@ class ProtonSDK {
   login = async () => {
     try {
       this.link = await ConnectWallet({
-        linkOptions: { chainId: this.chainId, endpoints: this.endpoints, scheme: process.env.REACT_APP_SCHEME },
+        linkOptions: { chainId: this.chainId, endpoints: this.endpoints },
         transportOptions: { requestAccount: this.requestAccount },
         selectorOptions: { appName: this.appName,appLogo: TasklyLogo}
       });
       const { session } = await this.link.login(this.appName);
+
       this.session = session;
-      console.log('session: ', session);
       localStorage.setItem('savedUserAuth', JSON.stringify(session.auth));
       return { auth: session.auth, accountData: session.accountData[0] };
     } catch (e) {
@@ -50,7 +50,7 @@ class ProtonSDK {
     if (savedUserAuth) {
       try {
         this.link = await ConnectWallet({
-          linkOptions: { chainId: this.chainId, endpoints: this.endpoints, scheme: process.env.REACT_APP_SCHEME },
+          linkOptions: { chainId: this.chainId, endpoints: this.endpoints},
           transportOptions: { requestAccount: this.requestAccount },
           selectorOptions: { appName: this.appName, appLogo: TasklyLogo, showSelector: false}
         });
