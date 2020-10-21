@@ -5,7 +5,7 @@ class ProtonSDK {
   constructor() {
     this.chainId = process.env.REACT_APP_CHAIN_ID;
     this.endpoints = [process.env.REACT_APP_CHAIN_ENDPOINT]; // Multiple for fault tolerance
-    this.appName = 'taskly';
+    this.appName = 'Taskly';
     this.requestAccount = 'taskly'; // optional
     this.session = null;
     this.link = null;
@@ -18,7 +18,7 @@ class ProtonSDK {
         transportOptions: { requestAccount: this.requestAccount },
         selectorOptions: { appName: this.appName,appLogo: TasklyLogo}
       });
-      const { session } = await this.link.login(this.appName);
+      const { session } = await this.link.login(this.requestAccount);
 
       this.session = session;
       localStorage.setItem('savedUserAuth', JSON.stringify(session.auth));
@@ -41,7 +41,7 @@ class ProtonSDK {
   }
 
   logout = async () => {
-    await this.link.removeSession(this.appName, this.session.auth);
+    await this.link.removeSession(this.requestAccount, this.session.auth);
     localStorage.removeItem('savedUserAuth');
   }
 
@@ -54,7 +54,7 @@ class ProtonSDK {
           transportOptions: { requestAccount: this.requestAccount },
           selectorOptions: { appName: this.appName, appLogo: TasklyLogo, showSelector: false}
         });
-        const result = await this.link.restoreSession(this.appName, savedUserAuth);
+        const result = await this.link.restoreSession(this.requestAccount, savedUserAuth);
         if (result) {
           this.session = result;
           return { auth: this.session.auth, accountData: this.session.accountData[0] };
