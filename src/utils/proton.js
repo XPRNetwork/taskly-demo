@@ -15,7 +15,7 @@ class ProtonSDK {
     try {
       this.link = await ConnectWallet({
         linkOptions: { chainId: this.chainId, endpoints: this.endpoints },
-        transportOptions: { requestAccount: this.requestAccount },
+        transportOptions: { requestAccount: this.requestAccount, backButton: true },
         selectorOptions: { appName: this.appName,appLogo: TasklyLogo}
       });
       const { session } = await this.link.login(this.requestAccount);
@@ -26,7 +26,7 @@ class ProtonSDK {
     } catch (e) {
       return e;
     }
-  }
+  };
 
   sendTransaction = async (actions) => {
     try {
@@ -38,12 +38,12 @@ class ProtonSDK {
     } catch (e) {
       return e;
     }
-  }
+  };
 
   logout = async () => {
     await this.link.removeSession(this.requestAccount, this.session.auth);
     localStorage.removeItem('savedUserAuth');
-  }
+  };
 
   restoreSession = async () => {
     const savedUserAuth = JSON.parse(localStorage.getItem('savedUserAuth'));
@@ -51,7 +51,7 @@ class ProtonSDK {
       try {
         this.link = await ConnectWallet({
           linkOptions: { chainId: this.chainId, endpoints: this.endpoints},
-          transportOptions: { requestAccount: this.requestAccount },
+          transportOptions: { requestAccount: this.requestAccount, backButton: true },
           selectorOptions: { appName: this.appName, appLogo: TasklyLogo, showSelector: false}
         });
         const result = await this.link.restoreSession(this.requestAccount, savedUserAuth);
@@ -63,8 +63,8 @@ class ProtonSDK {
         return e;
       }
     }
-    return { auth: { actor: '', permission: '' }, accountData: {}};
-  }
+    return { auth: { actor: '', permission: '' }, accountData: {} };
+  };
 }
 
 const protonSDK = new ProtonSDK();

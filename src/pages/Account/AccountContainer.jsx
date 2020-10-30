@@ -30,7 +30,7 @@ class AccountContainer extends React.Component {
         data: {
             from: actor,
             to: ProtonSDK.requestAccount,
-            quantity: '0.050000 XUSDT',
+            quantity: '5.000000 FOOBAR',
             memo: 'Taskly'
         }
       }];

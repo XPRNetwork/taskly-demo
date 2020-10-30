@@ -13,7 +13,10 @@ class HomeContainer extends React.Component {
 
   componentDidMount() {
     this.updateWindowWidth();
-    window.addEventListener('resize', this.updateWindowWidth)
+    window.addEventListener('resize', this.updateWindowWidth);
+    document.addEventListener('backToSelector', () => {
+      this.generateLoginRequest();
+    });
   }
 
   updateWindowWidth = () => {
@@ -25,7 +28,10 @@ class HomeContainer extends React.Component {
     try {
       this.setState({ isLoggingIn: true });
       const { auth, accountData } = await ProtonSDK.login();
-      setLoggedInState(auth.actor, auth.permission, accountData);
+      if (auth && auth.actor && auth.permission) {
+        setLoggedInState(auth.actor, auth.permission, accountData);
+      }
+      this.setState({ isLoggingIn: false });
     } catch (e) {
       console.error(e);
     }
