@@ -2,7 +2,7 @@ import React from 'react';
 
 const HamburgerIcon = () => (
   <svg width="18px" height="12px" viewBox="0 0 18 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="Website-01-(Mobile)" transform="translate(-341.000000, -48.000000)">
             <g id="baseline-menu-24px-(1)" transform="translate(338.000000, 42.000000)">
                 <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon>
