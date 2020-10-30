@@ -15,7 +15,7 @@ const Account = ({openConfirmModal, completedTasks, accountData, logout }) => {
       { completedTasks.map((text, index) => (
         <CompletedTask text={text} key={index} />
       ))}
-      <RedButton text="1 month of service" text2="$0.05" className="pay-button" handleOnClick={openConfirmModal} />
+      <RedButton text="1 month of service" text2="5 FOOBAR" className="pay-button" handleOnClick={openConfirmModal} />
     </LoggedInLayout>
   );
 }

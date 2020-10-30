@@ -30,7 +30,7 @@ exports[`Account component matches the rendered snapshot 1`] = `
     handleOnClick={[MockFunction]}
     isLoading={false}
     text="1 month of service"
-    text2="$0.05"
+    text2="5 FOOBAR"
   />
 </LoggedInLayout>
 `;
