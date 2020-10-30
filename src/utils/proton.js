@@ -5,8 +5,8 @@ class ProtonSDK {
   constructor() {
     this.chainId = process.env.REACT_APP_CHAIN_ID;
     this.endpoints = [process.env.REACT_APP_CHAIN_ENDPOINT]; // Multiple for fault tolerance
-    this.appName = "Taskly";
-    this.requestAccount = "taskly"; // optional
+    this.appName = 'Taskly';
+    this.requestAccount = 'taskly'; // optional
     this.session = null;
     this.link = null;
   }
@@ -42,11 +42,11 @@ class ProtonSDK {
 
   logout = async () => {
     await this.link.removeSession(this.appName, this.session.auth);
-    localStorage.removeItem("savedUserAuth");
+    localStorage.removeItem('savedUserAuth');
   };
 
   restoreSession = async () => {
-    const savedUserAuth = JSON.parse(localStorage.getItem("savedUserAuth"));
+    const savedUserAuth = JSON.parse(localStorage.getItem('savedUserAuth'));
     if (savedUserAuth) {
       try {
         this.link = await ConnectWallet({
@@ -63,7 +63,7 @@ class ProtonSDK {
         return e;
       }
     }
-    return { auth: { actor: "", permission: "" }, accountData: {} };
+    return { auth: { actor: '', permission: '' }, accountData: {} };
   };
 }
 
