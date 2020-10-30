@@ -41,7 +41,7 @@ class ProtonSDK {
   };
 
   logout = async () => {
-    await this.link.removeSession(this.appName, this.session.auth);
+    await this.link.removeSession(this.requestAccount, this.session.auth);
     localStorage.removeItem('savedUserAuth');
   };
 
