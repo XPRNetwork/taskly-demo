@@ -26,7 +26,7 @@ const Home = ({openLoginModal, windowWidth, isLoggingIn}) => {
           <h1>
             Get a virtual assistant. Organize like never before.
           </h1>
-          <RedButton text="Login with Proton" className="login-button" handleOnClick={openLoginModal} />
+          <RedButton text="Connect Wallet" className="login-button" handleOnClick={openLoginModal} />
           <div className="app-store-badges">
             <img src="./images/google-badge.png" alt="Download on Google" />
             <img src="./images/apple-badge.png" alt="Download on Apple" />
