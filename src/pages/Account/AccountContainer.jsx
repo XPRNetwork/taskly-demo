@@ -17,6 +17,7 @@ class AccountContainer extends React.Component {
     }
   }
 
+  /* istanbul ignore next */
   openConfirmModal = async () => {
     const { actor, permission, history } = this.props;
     try {
