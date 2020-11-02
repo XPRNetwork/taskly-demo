@@ -83,7 +83,7 @@ exports[`Home component matches the rendered snapshot with default props 1`] = `
         className="login-button"
         handleOnClick={[MockFunction]}
         isLoading={false}
-        text="Login with Proton"
+        text="Connect Wallet"
       />
       <div
         className="app-store-badges"
@@ -144,7 +144,7 @@ exports[`Home component matches the rendered snapshot with isLoggingIn true and 
         className="login-button"
         handleOnClick={[MockFunction]}
         isLoading={false}
-        text="Login with Proton"
+        text="Connect Wallet"
       />
       <div
         className="app-store-badges"
