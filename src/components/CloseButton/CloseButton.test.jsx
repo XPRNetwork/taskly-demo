@@ -4,8 +4,6 @@ import toJson from 'enzyme-to-json';
 import CloseButton from './CloseButton';
 import CloseIcon from './CloseIcon';
 
-// fill, width, opacity, className, viewBox,
-
 const createTestProps = props => ({
   handleOnClick: jest.fn(),
   ...props,
