@@ -14,6 +14,7 @@ class HomeContainer extends React.Component {
   componentDidMount() {
     this.updateWindowWidth();
     window.addEventListener('resize', this.updateWindowWidth);
+    /* istanbul ignore next */
     document.addEventListener('backToSelector', () => {
       this.generateLoginRequest();
     });
@@ -23,6 +24,7 @@ class HomeContainer extends React.Component {
     this.setState({ windowWidth: window.innerWidth });
   }
 
+  /* istanbul ignore next */
   generateLoginRequest = async () =>  {
     const { setLoggedInState } = this.props;
     try {

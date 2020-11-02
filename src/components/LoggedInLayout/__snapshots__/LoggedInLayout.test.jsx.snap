@@ -20,7 +20,7 @@ exports[`LoggedInLayout component matches the rendered snapshot if windowWidth i
         onClick={[MockFunction]}
         style={
           Object {
-            "backgroundImage": "url('data:image/jpeg;base64,')",
+            "backgroundImage": "url('./images/default-avatar.png')",
           }
         }
       />
@@ -71,7 +71,7 @@ exports[`LoggedInLayout component matches the rendered snapshot if windowWidth i
         onClick={[MockFunction]}
         style={
           Object {
-            "backgroundImage": "url('data:image/jpeg;base64,')",
+            "backgroundImage": "url('./images/default-avatar.png')",
           }
         }
       />
