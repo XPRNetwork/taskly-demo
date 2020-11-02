@@ -19,6 +19,14 @@ describe('RedButton component', () => {
     shallow(<RedButton {...props} />);
   });
 
+  it('renders without crashing while loading', () => {
+    shallow(<RedButton {...props} isLoading={true} />);
+  });
+
+  it('renders without crashing with a second text', () => {
+    shallow(<RedButton {...props} text2='hi' />);
+  });
+
   it('matches the rendered snapshot', () => {
     const component = shallow(<RedButton {...props} />);
     expect(toJson(component)).toMatchSnapshot();

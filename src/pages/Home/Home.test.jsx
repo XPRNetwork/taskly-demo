@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import Home from './Home';
+import HamburgerIcon from './HamburgerIcon';
 
 const createTestProps = props => ({
   openLoginModal: jest.fn(),
@@ -32,6 +33,17 @@ describe('Home component', () => {
       isLoggingIn: true
     });
     const component = shallow(<Home {...props} />);
+    expect(toJson(component)).toMatchSnapshot();
+  });
+});
+
+describe('HamburgerIcon component', () => {
+  it('renders without crashing', () => {
+    shallow(<HamburgerIcon />);
+  });
+
+  it('matches the rendered snapshot with default props', () => {
+    const component = shallow(<HamburgerIcon />);
     expect(toJson(component)).toMatchSnapshot();
   });
 });

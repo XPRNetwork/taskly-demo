@@ -1,17 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { RedButton, RedBackground } from '../../components';
-import HamburgerIcon from './HamburgerIcon';
-import './Home.sass';
+import React from "react";
+import PropTypes from "prop-types";
+import { RedButton, RedBackground } from "../../components";
+import HamburgerIcon from "./HamburgerIcon";
+import "./Home.sass";
 
-const Home = ({openLoginModal, windowWidth, isLoggingIn}) => {
+const Home = ({ openLoginModal, windowWidth }) => {
   return (
     <div className="page">
       <div className="page-wrapper">
         <div className="header">
           <img src="./images/taskly-logo.svg" alt="Taskly" />
           <div className="header-buttons">
-            { windowWidth > 700 ? (
+            {windowWidth > 700 ? (
               <>
                 <div className="header-button-item">Services</div>
                 <div className="header-button-item">About Us</div>
@@ -38,12 +38,11 @@ const Home = ({openLoginModal, windowWidth, isLoggingIn}) => {
       </div>
     </div>
   );
-}
+};
 
 export default Home;
 
 Home.propTypes = {
   openLoginModal: PropTypes.func.isRequired,
   windowWidth: PropTypes.number.isRequired,
-  isLoggingIn: PropTypes.bool.isRequired,
-}
+};

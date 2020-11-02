@@ -22,6 +22,10 @@ describe('LoggedInLayout component', () => {
     shallow(<LoggedInLayout {...props} />);
   });
 
+  it('renders without crashing with non empty avatar', () => {
+    shallow(<LoggedInLayout {...props} avatar='hi' />);
+  });
+
   it('matches the rendered snapshot if windowWidth is less than 700', () => {
     const component = shallow(<LoggedInLayout {...props} />);
     component.setState({ windowWidth: 600 });
