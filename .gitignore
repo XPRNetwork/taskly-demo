@@ -7,7 +7,6 @@
 
 # testing
 /coverage
-/deploy-tools
 
 # misc
 .DS_Store
