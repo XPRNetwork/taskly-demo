@@ -21,8 +21,8 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: proton-taskly-demo    # TODO: update to cluster name
   GKE_ZONE: us-west1-a   # TODO: update to cluster zone
-  DEPLOYMENT_NAME: proton-taskly-demo # TODO: update to deployment name
-  IMAGE: static-site
+  DEPLOYMENT_NAME: taskly-demo # TODO: update to deployment name
+  IMAGE: taskly-demo
 
 jobs:
   setup-build-publish-deploy:
@@ -72,6 +72,6 @@ jobs:
     - name: Deploy
       run: |-
         ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
-        ./kustomize build deploy-tools/k8s | kubectl apply -f -
+        ./kustomize build . | kubectl apply -f -
         kubectl rollout status deployment/$DEPLOYMENT_NAME
         kubectl get services -o wide
