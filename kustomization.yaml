@@ -1,7 +1,7 @@
 commonLabels:
   app: taskly-demo
 resources:
-- app.yaml
+- deployment.yaml
 - certificate-storage.yaml
 - ingress-tls.yaml
 - letsencrypt-ssl-cert-issuer.yaml
