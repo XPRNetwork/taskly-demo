@@ -20,7 +20,6 @@ class App extends React.Component {
   }
 
   componentDidMount = async ()  => { 
-    console.log('TESTING +++++')
     this.checkIfLoggedIn();
   }
 
