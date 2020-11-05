@@ -16,7 +16,6 @@ spec:
     spec:
       containers:
       - name: taskly-demo
-        image: gcr.io/proton-wallet/proton-taskly-demo@sha256:afd375d2cc48377e5b4a093693c6145aa7cebba7c954f697e29574bcb0ebbb43
         ports:
         - containerPort: 3000
 
