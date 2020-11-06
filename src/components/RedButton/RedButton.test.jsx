@@ -32,4 +32,8 @@ describe('RedButton component', () => {
     expect(toJson(component)).toMatchSnapshot();
   });
 
+  it('tests click', () => {
+    const component = shallow(<RedButton {...props} />);
+    component.find('button').simulate('click');
+  });
 });
