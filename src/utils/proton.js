@@ -13,15 +13,14 @@ class ProtonSDK {
 
   login = async () => {
     try {
-      this.link = await ConnectWallet({
+      const { link, session } = await ConnectWallet({
         linkOptions: { chainId: this.chainId, endpoints: this.endpoints },
-        transportOptions: { requestAccount: this.requestAccount },
+        transportOptions: { requestAccount: this.requestAccount, backButton: true },
         selectorOptions: { appName: this.appName,appLogo: TasklyLogo}
       });
-      const { session } = await this.link.login(this.requestAccount);
-
+      this.link = link;
       this.session = session;
-      localStorage.setItem('savedUserAuth', JSON.stringify(session.auth));
+
       return { auth: session.auth, accountData: session.accountData[0] };
     } catch (e) {
       return e;
@@ -42,28 +41,26 @@ class ProtonSDK {
 
   logout = async () => {
     await this.link.removeSession(this.requestAccount, this.session.auth);
-    localStorage.removeItem('savedUserAuth');
   }
 
   restoreSession = async () => {
-    const savedUserAuth = JSON.parse(localStorage.getItem('savedUserAuth'));
-    if (savedUserAuth) {
-      try {
-        this.link = await ConnectWallet({
-          linkOptions: { chainId: this.chainId, endpoints: this.endpoints},
-          transportOptions: { requestAccount: this.requestAccount },
-          selectorOptions: { appName: this.appName, appLogo: TasklyLogo, showSelector: false}
-        });
-        const result = await this.link.restoreSession(this.requestAccount, savedUserAuth);
-        if (result) {
-          this.session = result;
-          return { auth: this.session.auth, accountData: this.session.accountData[0] };
-        }
-      } catch(e) {
-        return e;
+    try {
+      const { link, session } = await ConnectWallet({
+        linkOptions: { chainId: this.chainId, endpoints: this.endpoints, restoreSession: true},
+        transportOptions: { requestAccount: this.requestAccount },
+        selectorOptions: { appName: this.appName, appLogo: TasklyLogo, showSelector: false}
+      });
+      this.link = link;
+      this.session = session;
+
+      if (session) {
+        return { auth: this.session.auth, accountData: this.session.accountData[0] };
+      } else {
+        return { auth: { actor: '', permission: '' }, accountData: {}};
       }
+    } catch(e) {
+      return e;
     }
-    return { auth: { actor: '', permission: '' }, accountData: {}};
   }
 }
 
