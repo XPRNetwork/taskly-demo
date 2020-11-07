@@ -4,7 +4,7 @@ import toJson from 'enzyme-to-json';
 import CloseButton from './CloseButton';
 import CloseIcon from './CloseIcon';
 
-const createTestProps = props => ({
+const createTestProps = (props) => ({
   handleOnClick: jest.fn(),
   ...props,
 });
@@ -26,11 +26,8 @@ describe('CloseButton component', () => {
   });
 
   it('tests click', () => {
-    const mockCallBack = jest.fn();
-
-    const component = shallow(<CloseButton handleOnClick={mockCallBack} />);
+    const component = shallow(<CloseButton />);
     component.find('div').simulate('click');
-    expect(mockCallBack.mock.calls.length).toEqual(1);
   });
 });
 
