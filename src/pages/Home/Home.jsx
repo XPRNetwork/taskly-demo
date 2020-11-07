@@ -4,7 +4,7 @@ import { RedButton, RedBackground } from "../../components";
 import HamburgerIcon from "./HamburgerIcon";
 import "./Home.sass";
 
-const Home = ({ openLoginModal, windowWidth }) => {
+const Home = ({openLoginModal, windowWidth}) => {
   return (
     <div className="page">
       <div className="page-wrapper">
@@ -44,5 +44,5 @@ export default Home;
 
 Home.propTypes = {
   openLoginModal: PropTypes.func.isRequired,
-  windowWidth: PropTypes.number.isRequired,
-};
+  windowWidth: PropTypes.number.isRequired
+}
