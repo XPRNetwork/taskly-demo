@@ -25,7 +25,7 @@ const Home = ({openLoginModal, windowWidth}) => {
         <div className="main">
           <h1>Get a virtual assistant. Organize like never before.</h1>
           <RedButton
-            text="Login with Proton"
+            text="Connect with Wallet"
             className="login-button"
             handleOnClick={openLoginModal}
           />
