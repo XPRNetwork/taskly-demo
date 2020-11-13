@@ -5,6 +5,7 @@ import AccountContainer from './AccountContainer';
 
 const createTestProps = props => ({
   logout: jest.fn(),
+  isPageHidden: jest.fn(),
   actor: 'test',
   permission: 'active',
   history: {

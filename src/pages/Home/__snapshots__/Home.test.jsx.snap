@@ -104,7 +104,7 @@ exports[`Home component matches the rendered snapshot with isLoggingIn true and 
       <RedButton
         className="login-button"
         handleOnClick={[MockFunction]}
-        isLoading={true}
+        isLoading={false}
         text="Login with Proton"
       />
       <div
