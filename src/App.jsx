@@ -34,8 +34,22 @@ class App extends React.Component {
     const { history } = this.props;
     this.setState({ actor, permission, accountData });
     if (!window.location.href.includes('/account') && !window.location.href.includes('/tasks')) {
-      history.push('/account');
+      if (this.isPageHidden()) {
+        window.onfocus = this.loadAccountsPage;
+      } else {
+        history.push('/account')
+      }
     }
+  }
+
+  isPageHidden = () => {
+    return document.hidden || document.msHidden || document.webkitHidden || document.mozHidden;
+  }
+
+  loadAccountsPage = () => {
+    const { history } = this.props;
+    history.push('/account');
+    window.onfocus = null;
   }
 
   logout = async () => {
@@ -56,7 +70,7 @@ class App extends React.Component {
     return (
       <Switch>
         <Route path="/tasks" render={() => <TasksContainer accountData={accountData} logout={this.logout} permission={permission} actor={actor} />} />
-        <Route path="/account" render={() => <AccountContainer location={location} accountData={accountData} actor={actor} permission={permission} logout={this.logout} history={history} />} />
+        <Route path="/account" render={() => <AccountContainer location={location} accountData={accountData} actor={actor} permission={permission} logout={this.logout} history={history} isPageHidden={this.isPageHidden}/>} />
         <Route path="/" render={() => <HomeContainer setLoggedInState={this.setLoggedInState} />} />
       </Switch>
     );
