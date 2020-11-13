@@ -18,7 +18,7 @@ class AccountContainer extends React.Component {
   }
 
   openConfirmModal = async () => {
-    const { actor, permission, history, isPageHidden } = this.props;
+    const { actor, permission, isPageHidden } = this.props;
     try {
       const actions = [{
         account: 'xtokens',
@@ -39,7 +39,7 @@ class AccountContainer extends React.Component {
         if (isPageHidden()) {
           window.onfocus = this.loadTasksPage;
         } else {
-          history.push('/tasks');
+          this.loadTasksPage();
         }
       }
     } catch (e) {

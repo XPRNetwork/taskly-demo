@@ -31,13 +31,12 @@ class App extends React.Component {
   }
 
   setLoggedInState = async (actor, permission, accountData) => {
-    const { history } = this.props;
     this.setState({ actor, permission, accountData });
     if (!window.location.href.includes('/account') && !window.location.href.includes('/tasks')) {
       if (this.isPageHidden()) {
         window.onfocus = this.loadAccountsPage;
       } else {
-        history.push('/account')
+        this.loadAccountsPage();
       }
     }
   }
