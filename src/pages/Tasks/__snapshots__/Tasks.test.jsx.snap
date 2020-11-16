@@ -11,10 +11,10 @@ exports[`PlusIcon component matches the rendered snapshot 1`] = `
 >
   <g
     fill="none"
-    fill-rule="evenodd"
+    fillRule="evenodd"
     id="Page-1"
     stroke="none"
-    stroke-width="1"
+    strokeWidth="1"
   >
     <g
       id="Website-05"
@@ -30,7 +30,7 @@ exports[`PlusIcon component matches the rendered snapshot 1`] = `
         >
           <polygon
             fill="#999999"
-            fill-rule="nonzero"
+            fillRule="nonzero"
             id="Path"
             points="19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11"
           />
