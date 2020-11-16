@@ -19,7 +19,7 @@ class AccountContainer extends React.Component {
 
   /* istanbul ignore next */
   openConfirmModal = async () => {
-    const { actor, permission, history } = this.props;
+    const { actor, permission, isPageHidden } = this.props;
     try {
       const actions = [{
         account: 'xtokens',
@@ -37,11 +37,21 @@ class AccountContainer extends React.Component {
       }];
       const tx = await ProtonSDK.sendTransaction(actions);
       if (tx.processed.id) {
-        history.push('/tasks');
+        if (isPageHidden()) {
+          window.onfocus = this.loadTasksPage;
+        } else {
+          this.loadTasksPage();
+        }
       }
     } catch (e) {
       console.error(e);
     }
+  }
+
+  loadTasksPage = () => {
+    const { history } = this.props;
+    history.push('/tasks');
+    window.onfocus = null;
   }
 
   render() {
@@ -59,6 +69,7 @@ AccountContainer.propTypes = {
   permission: PropTypes.string,
   actor: PropTypes.string,
   logout: PropTypes.func.isRequired,
+  isPageHidden: PropTypes.func.isRequired,
 };
 
 AccountContainer.defaultProps = {
