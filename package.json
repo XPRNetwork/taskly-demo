@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@protonprotocol/proton-web-sdk": "^2.6.0",
+    "@proton/web-sdk": "2.7.7",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -47,12 +47,12 @@
   },
   "jest": {
     "collectCoverageFrom": [
-        "**/*.{js,jsx}",
-        "!**/node_modules/**",
-        "!**/*App.jsx",
-        "!**/*index.jsx",
-        "!**/*serviceWorker.js",
-        "!**/*proton.js"
+      "**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/*App.jsx",
+      "!**/*index.jsx",
+      "!**/*serviceWorker.js",
+      "!**/*proton.js"
     ]
   }
 }
