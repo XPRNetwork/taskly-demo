@@ -1,4 +1,4 @@
-import { ConnectWallet } from '@protonprotocol/proton-web-sdk'
+import { ConnectWallet } from '@proton/web-sdk'
 import TasklyLogo from '../taskly-logo.svg'
 
 class ProtonSDK {
@@ -11,17 +11,34 @@ class ProtonSDK {
     this.link = null;
   }
 
+  connect = async ({ restoreSession }) => {
+    const { link, session } = await ConnectWallet({
+      linkOptions: {
+        chainId: this.chainId,
+        endpoints: this.endpoints,
+        restoreSession,
+      },
+      transportOptions: {
+        requestAccount: this.requestAccount,
+        backButton: true,
+      },
+      selectorOptions: {
+        appName: this.appName,
+        appLogo: TasklyLogo,
+      },
+    });
+    this.link = link;
+    this.session = session;
+  };
+
   login = async () => {
     try {
-      const { link, session } = await ConnectWallet({
-        linkOptions: { chainId: this.chainId, endpoints: this.endpoints },
-        transportOptions: { requestAccount: this.requestAccount, backButton: true },
-        selectorOptions: { appName: this.appName,appLogo: TasklyLogo}
-      });
-      this.link = link;
-      this.session = session;
-
-      return { auth: session.auth, accountData: session.accountData[0] };
+      await this.connect({ restoreSession: false });
+      const { auth, accountData } = this.session;
+      return {
+        auth,
+        accountData: accountData[0]
+      };
     } catch (e) {
       return e;
     }
@@ -45,22 +62,24 @@ class ProtonSDK {
 
   restoreSession = async () => {
     try {
-      const { link, session } = await ConnectWallet({
-        linkOptions: { chainId: this.chainId, endpoints: this.endpoints, restoreSession: true},
-        transportOptions: { requestAccount: this.requestAccount },
-        selectorOptions: { appName: this.appName, appLogo: TasklyLogo, showSelector: false}
-      });
-      this.link = link;
-      this.session = session;
-
-      if (session) {
-        return { auth: this.session.auth, accountData: this.session.accountData[0] };
-      } else {
-        return { auth: { actor: '', permission: '' }, accountData: {}};
+      await this.connect({ restoreSession: true });
+      if (this.session) {
+        const { auth, accountData } = this.session;
+        return {
+          auth,
+          accountData: accountData[0],
+        };
       }
     } catch(e) {
       return e;
     }
+    return {
+      auth: {
+        actor: '',
+        permission: ''
+      },
+      accountData: {}
+    };
   }
 }
 
