@@ -24,6 +24,7 @@ class App extends React.Component {
     const { auth, accountData, error } = await ProtonSDK.restoreSession();
     if (error) {
       this.setErrorState(error);
+      return;
     }
     if (!auth || !auth.actor || !auth.permission) {
       return;
