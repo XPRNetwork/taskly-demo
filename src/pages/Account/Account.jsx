@@ -17,7 +17,7 @@ const Account = ({openConfirmModal, completedTasks, accountData, logout, error }
         <CompletedTask text={text} key={index} />
       ))}
       <RedButton text="1 month of service" text2="5 FOOBAR" className="pay-button" handleOnClick={openConfirmModal} />
-      <h4 className="error">{error ? error : ''}</h4>
+      {error ? <h4>{error}</h4> : null}
     </LoggedInLayout>
   );
 }

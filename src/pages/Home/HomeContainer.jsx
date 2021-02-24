@@ -28,11 +28,12 @@ class HomeContainer extends React.Component {
   generateLoginRequest = async () => {
     const { setLoggedInState, setErrorState } = this.props;
     const { auth, accountData, error } = await ProtonSDK.login();
-    if (error) {
-      setErrorState(error);
-    } else if (auth && auth.actor && auth.permission) {
-      setLoggedInState(auth.actor, auth.permission, accountData);
+    if (error || !(auth && auth.actor && auth.permission)) {
+      setErrorState(error || "Login error");
+      return;
     }
+      
+    setLoggedInState(auth.actor, auth.permission, accountData);
   };
 
   render() {

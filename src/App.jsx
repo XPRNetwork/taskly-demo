@@ -22,11 +22,12 @@ class App extends React.Component {
 
   checkIfLoggedIn = async () => {
     const { auth, accountData, error } = await ProtonSDK.restoreSession();
-    if (error) {
-      this.setErrorState(error);
-    } else if (auth && auth.actor && auth.permission) {
-      this.setLoggedInState(auth.actor, auth.permission, accountData);
+    if (error || !(auth && auth.actor && auth.permission)) {
+      this.setErrorState(error || "Restore error");
+      return;
     }
+
+    this.setLoggedInState(auth.actor, auth.permission, accountData);
   };
 
   setErrorState = (error) => {
