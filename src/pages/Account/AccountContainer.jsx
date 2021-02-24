@@ -40,7 +40,7 @@ class AccountContainer extends React.Component {
     ];
     const { processed, error } = await ProtonSDK.sendTransaction(actions);
     if (error) {
-      this.setErrorState(error);
+      setErrorState(error);
       return;
     }
     if (!processed || !processed.id) {
