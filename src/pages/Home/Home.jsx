@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { RedButton, RedBackground } from "../../components";
 import HamburgerIcon from "./HamburgerIcon";
 import "./Home.sass";
+import '../../App.sass';
 
 const Home = ({openLoginModal, windowWidth, error}) => {
   return (

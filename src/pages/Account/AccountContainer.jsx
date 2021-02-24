@@ -13,53 +13,61 @@ class AccountContainer extends React.Component {
         'Organized all your contacts',
         'Contact DMV about updating tags',
         'Sent a request to your building manager',
-      ]
-    }
+      ],
+    };
   }
 
   /* istanbul ignore next */
   openConfirmModal = async () => {
-    const { actor, permission, isPageHidden } = this.props;
-    try {
-      const actions = [{
+    const { actor, permission, isPageHidden, setErrorState } = this.props;
+    const actions = [
+      {
         account: 'xtokens',
         name: 'transfer',
-        authorization: [{
-          actor: actor,
-          permission: permission
-        }],
+        authorization: [
+          {
+            actor: actor,
+            permission: permission,
+          },
+        ],
         data: {
-            from: actor,
-            to: ProtonSDK.requestAccount,
-            quantity: '5.000000 FOOBAR',
-            memo: 'Taskly'
-        }
-      }];
-      const tx = await ProtonSDK.sendTransaction(actions);
-      if (tx.processed && tx.processed.id) {
-        if (isPageHidden()) {
-          window.onfocus = this.loadTasksPage;
-        } else {
-          this.loadTasksPage();
-        }
+          from: actor,
+          to: ProtonSDK.requestAccount,
+          quantity: '5.000000 FOOBAR',
+          memo: 'Taskly',
+        },
+      },
+    ];
+    const { processed, error } = await ProtonSDK.sendTransaction(actions);
+    if (error) {
+      setErrorState(error);
+    } else if (processed && processed.id) {
+      if (isPageHidden()) {
+        window.onfocus = this.loadTasksPage;
+      } else {
+        this.loadTasksPage();
       }
-    } catch (e) {
-      console.error(e);
     }
-  }
+  };
 
   loadTasksPage = () => {
     const { history } = this.props;
     history.push('/tasks');
     window.onfocus = null;
-  }
+  };
 
   render() {
     const { completedTasks } = this.state;
-    const { accountData, logout } = this.props;
+    const { accountData, logout, err } = this.props;
 
-    return(
-      <Account openConfirmModal={this.openConfirmModal} completedTasks={completedTasks} accountData={accountData} logout={logout} />
+    return (
+      <Account
+        openConfirmModal={this.openConfirmModal}
+        completedTasks={completedTasks}
+        accountData={accountData}
+        logout={logout}
+        error={err}
+      />
     );
   }
 }

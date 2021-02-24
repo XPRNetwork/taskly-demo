@@ -35,7 +35,7 @@ class ProtonSDK {
       );
       return result;
     } catch (e) {
-      return e;
+      return { error: e };
     }
   };
 
@@ -59,7 +59,7 @@ class ProtonSDK {
         return { auth: { actor: '', permission: '' }, accountData: {}};
       }
     } catch(e) {
-      return e;
+      return { error: e };
     }
   }
 }
