@@ -30,7 +30,7 @@ const Home = ({openLoginModal, windowWidth, error}) => {
             className="login-button"
             handleOnClick={openLoginModal}
           />
-          {error ? <h4>{error}</h4> : null}
+          {error ? <h4 className="error">{error}</h4> : null}
           <div className="app-store-badges">
             <img src="./images/google-badge.png" alt="Download on Google" />
             <img src="./images/apple-badge.png" alt="Download on Apple" />

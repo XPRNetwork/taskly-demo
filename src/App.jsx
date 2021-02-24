@@ -22,8 +22,10 @@ class App extends React.Component {
 
   checkIfLoggedIn = async () => {
     const { auth, accountData, error } = await ProtonSDK.restoreSession();
-    if (error || !(auth && auth.actor && auth.permission)) {
-      this.setErrorState(error || "Restore error");
+    if (error) {
+      this.setErrorState(error);
+    }
+    if (!auth || !auth.actor || !auth.permission) {
       return;
     }
 
