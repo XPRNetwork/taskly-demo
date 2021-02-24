@@ -15,7 +15,7 @@ class App extends React.Component {
       actor: '',
       permission: '',
       session: '',
-      accountData: {}
+      accountData: {},
     };
   }
 

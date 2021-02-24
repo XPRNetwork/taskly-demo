@@ -36,7 +36,7 @@ class AccountContainer extends React.Component {
         }
       }];
       const tx = await ProtonSDK.sendTransaction(actions);
-      if (tx.processed.id) {
+      if (tx.processed && tx.processed.id) {
         if (isPageHidden()) {
           window.onfocus = this.loadTasksPage;
         } else {
