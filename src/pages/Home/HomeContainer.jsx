@@ -37,13 +37,13 @@ class HomeContainer extends React.Component {
 
   render() {
     const { windowWidth } = this.state;
-    const { err } = this.props;
+    const { error } = this.props;
 
     return (
       <Home
         openLoginModal={this.generateLoginRequest}
         windowWidth={windowWidth}
-        error={err}
+        error={error}
       />
     );
   }

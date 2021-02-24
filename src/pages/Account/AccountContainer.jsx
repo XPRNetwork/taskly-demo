@@ -58,7 +58,7 @@ class AccountContainer extends React.Component {
 
   render() {
     const { completedTasks } = this.state;
-    const { accountData, logout, err } = this.props;
+    const { accountData, logout, error } = this.props;
 
     return (
       <Account
@@ -66,7 +66,7 @@ class AccountContainer extends React.Component {
         completedTasks={completedTasks}
         accountData={accountData}
         logout={logout}
-        error={err}
+        error={error}
       />
     );
   }

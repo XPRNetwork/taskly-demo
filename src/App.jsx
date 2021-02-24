@@ -94,7 +94,7 @@ class App extends React.Component {
           path='/account'
           render={() => (
             <AccountContainer
-              err={error}
+              error={error}
               setErrorState={this.setErrorState}
               location={location}
               accountData={accountData}
@@ -110,7 +110,7 @@ class App extends React.Component {
           path='/'
           render={() => (
             <HomeContainer
-              err={error}
+              error={error}
               setErrorState={this.setErrorState}
               setLoggedInState={this.setLoggedInState}
             />
