@@ -1,10 +1,6 @@
 import React from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
-import {
-  HomeContainer,
-  AccountContainer,
-  TasksContainer,
-} from './pages';
+import { HomeContainer, AccountContainer, TasksContainer } from './pages';
 import ProtonSDK from './utils/proton';
 import './App.sass';
 
@@ -15,41 +11,60 @@ class App extends React.Component {
       actor: '',
       permission: '',
       session: '',
-      accountData: {}
+      accountData: {},
+      error: '',
     };
   }
 
-  componentDidMount = async ()  => { 
+  componentDidMount = async () => {
     this.checkIfLoggedIn();
-  }
+  };
 
   checkIfLoggedIn = async () => {
-    const { auth, accountData } = await ProtonSDK.restoreSession();
-    if (auth && auth.actor && auth.permission) {
-      this.setLoggedInState(auth.actor, auth.permission, accountData);
+    const { auth, accountData, error } = await ProtonSDK.restoreSession();
+    if (error) {
+      this.setErrorState(error);
+      return;
     }
-  }
+    if (!auth || !auth.actor || !auth.permission) {
+      return;
+    }
+
+    this.setLoggedInState(auth.actor, auth.permission, accountData);
+  };
+
+  setErrorState = (error) => {
+    this.setState({ error: error.toString() });
+  };
 
   setLoggedInState = async (actor, permission, accountData) => {
     this.setState({ actor, permission, accountData });
-    if (!window.location.href.includes('/account') && !window.location.href.includes('/tasks')) {
+    if (
+      !window.location.href.includes('/account') &&
+      !window.location.href.includes('/tasks')
+    ) {
       if (this.isPageHidden()) {
         window.onfocus = this.loadAccountsPage;
       } else {
         this.loadAccountsPage();
       }
     }
-  }
+  };
 
   isPageHidden = () => {
-    return document.hidden || document.msHidden || document.webkitHidden || document.mozHidden;
-  }
+    return (
+      document.hidden ||
+      document.msHidden ||
+      document.webkitHidden ||
+      document.mozHidden
+    );
+  };
 
   loadAccountsPage = () => {
     const { history } = this.props;
     history.push('/account');
     window.onfocus = null;
-  }
+  };
 
   logout = async () => {
     const { accountData } = this.state;
@@ -60,17 +75,51 @@ class App extends React.Component {
     }
 
     history.push('/');
-  }
+  };
 
   render() {
-    const { accountData, actor, permission } = this.state;
+    const { accountData, actor, permission, error } = this.state;
     const { history, location } = this.props;
-    
+
     return (
       <Switch>
-        <Route path="/tasks" render={() => <TasksContainer accountData={accountData} logout={this.logout} permission={permission} actor={actor} />} />
-        <Route path="/account" render={() => <AccountContainer location={location} accountData={accountData} actor={actor} permission={permission} logout={this.logout} history={history} isPageHidden={this.isPageHidden}/>} />
-        <Route path="/" render={() => <HomeContainer setLoggedInState={this.setLoggedInState} />} />
+        <Route
+          path='/tasks'
+          render={() => (
+            <TasksContainer
+              accountData={accountData}
+              logout={this.logout}
+              permission={permission}
+              actor={actor}
+            />
+          )}
+        />
+        <Route
+          path='/account'
+          render={() => (
+            <AccountContainer
+              error={error}
+              setErrorState={this.setErrorState}
+              location={location}
+              accountData={accountData}
+              actor={actor}
+              permission={permission}
+              logout={this.logout}
+              history={history}
+              isPageHidden={this.isPageHidden}
+            />
+          )}
+        />
+        <Route
+          path='/'
+          render={() => (
+            <HomeContainer
+              error={error}
+              setErrorState={this.setErrorState}
+              setLoggedInState={this.setLoggedInState}
+            />
+          )}
+        />
       </Switch>
     );
   }

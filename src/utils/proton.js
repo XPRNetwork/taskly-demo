@@ -1,4 +1,4 @@
-import { ConnectWallet } from '@protonprotocol/proton-web-sdk'
+import { ConnectWallet } from '@proton/web-sdk'
 import TasklyLogo from '../taskly-logo.svg'
 
 class ProtonSDK {
@@ -16,14 +16,14 @@ class ProtonSDK {
       const { link, session } = await ConnectWallet({
         linkOptions: { chainId: this.chainId, endpoints: this.endpoints },
         transportOptions: { requestAccount: this.requestAccount, backButton: true },
-        selectorOptions: { appName: this.appName,appLogo: TasklyLogo}
+        selectorOptions: { appName: this.appName, appLogo: TasklyLogo}
       });
       this.link = link;
       this.session = session;
 
       return { auth: session.auth, accountData: session.accountData[0] };
     } catch (e) {
-      return e;
+      return { error: e };
     }
   };
 
@@ -35,7 +35,7 @@ class ProtonSDK {
       );
       return result;
     } catch (e) {
-      return e;
+      return { error: e };
     }
   };
 
@@ -59,7 +59,7 @@ class ProtonSDK {
         return { auth: { actor: '', permission: '' }, accountData: {}};
       }
     } catch(e) {
-      return e;
+      return { error: e };
     }
   }
 }

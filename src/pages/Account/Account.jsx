@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { RedButton, CompletedTask, LoggedInLayout } from '../../components';
 import './Account.sass';
+import '../../App.sass';
 
-const Account = ({openConfirmModal, completedTasks, accountData, logout }) => {
+const Account = ({openConfirmModal, completedTasks, accountData, logout, error }) => {
   return (
     <LoggedInLayout mainImageUrl="./images/smiling-girl-bust.png" avatar={accountData.avatar} logout={logout}>
       <h1>
@@ -16,6 +17,7 @@ const Account = ({openConfirmModal, completedTasks, accountData, logout }) => {
         <CompletedTask text={text} key={index} />
       ))}
       <RedButton text="1 month of service" text2="5 FOOBAR" className="pay-button" handleOnClick={openConfirmModal} />
+      {error ? <h4 className="error">{error}</h4> : null}
     </LoggedInLayout>
   );
 }
