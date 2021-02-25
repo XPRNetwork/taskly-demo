@@ -90,11 +90,6 @@ class App extends React.Component {
 
     return (
       <Switch>
-<<<<<<< HEAD
-        <Route path="/tasks" render={() => <TasksContainer accountData={accountData} logout={this.logout} permission={permission} actor={actor} />} />
-        <Route path="/account" render={() => <AccountContainer location={location} accountData={accountData} actor={actor} permission={permission} logout={this.logout} history={history} isPageHidden={this.isPageHidden}/>} />
-        <Route path="/" render={() => <HomeContainer setLoggedInState={this.setLoggedInState} />} />
-=======
         <Route
           path='/tasks'
           render={() => (
@@ -132,7 +127,6 @@ class App extends React.Component {
             />
           )}
         />
->>>>>>> 26161edd1580b70d88824603e37e0afa0d2e7103
       </Switch>
     );
   }
