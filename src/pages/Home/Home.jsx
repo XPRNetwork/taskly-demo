@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import { RedButton, RedBackground } from "../../components";
 import HamburgerIcon from "./HamburgerIcon";
 import "./Home.sass";
+import '../../App.sass';
 
-const Home = ({openLoginModal, windowWidth}) => {
+const Home = ({openLoginModal, windowWidth, error}) => {
   return (
     <div className="page">
       <div className="page-wrapper">
@@ -29,6 +30,7 @@ const Home = ({openLoginModal, windowWidth}) => {
             className="login-button"
             handleOnClick={openLoginModal}
           />
+          {error ? <h4 className="error">{error}</h4> : null}
           <div className="app-store-badges">
             <img src="./images/google-badge.png" alt="Download on Google" />
             <img src="./images/apple-badge.png" alt="Download on Apple" />

@@ -33,14 +33,17 @@ class ProtonSDK {
 
   login = async () => {
     try {
-      await this.connect({ restoreSession: false });
-      const { auth, accountData } = this.session;
-      return {
-        auth,
-        accountData: accountData[0]
-      };
+      const { link, session } = await ConnectWallet({
+        linkOptions: { chainId: this.chainId, endpoints: this.endpoints },
+        transportOptions: { requestAccount: this.requestAccount, backButton: true },
+        selectorOptions: { appName: this.appName, appLogo: TasklyLogo}
+      });
+      this.link = link;
+      this.session = session;
+
+      return { auth: session.auth, accountData: session.accountData[0] };
     } catch (e) {
-      return e;
+      return { error: e };
     }
   };
 
@@ -52,7 +55,7 @@ class ProtonSDK {
       );
       return result;
     } catch (e) {
-      return e;
+      return { error: e };
     }
   };
 
@@ -71,7 +74,7 @@ class ProtonSDK {
         };
       }
     } catch(e) {
-      return e;
+      return { error: e };
     }
     return {
       auth: {

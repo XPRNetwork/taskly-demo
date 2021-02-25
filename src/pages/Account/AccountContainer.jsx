@@ -13,40 +13,52 @@ class AccountContainer extends React.Component {
         'Organized all your contacts',
         'Contact DMV about updating tags',
         'Sent a request to your building manager',
-      ]
-    }
+      ],
+    };
   }
 
   /* istanbul ignore next */
   openConfirmModal = async () => {
-    const { actor, permission, isPageHidden } = this.props;
-    try {
-      const actions = [{
+    const { actor, permission, isPageHidden, setErrorState } = this.props;
+    const actions = [
+      {
         account: 'xtokens',
         name: 'transfer',
-        authorization: [{
-          actor: actor,
-          permission: permission
-        }],
+        authorization: [
+          {
+            actor: actor,
+            permission: permission,
+          },
+        ],
         data: {
-            from: actor,
-            to: ProtonSDK.requestAccount,
-            quantity: '5.000000 FOOBAR',
-            memo: 'Taskly'
-        }
-      }];
-      const tx = await ProtonSDK.sendTransaction(actions);
-      if (tx.processed.id) {
-        if (isPageHidden()) {
-          window.onfocus = this.loadTasksPage;
-        } else {
-          this.loadTasksPage();
-        }
-      }
-    } catch (e) {
-      console.error(e);
+          from: actor,
+          to: ProtonSDK.requestAccount,
+          quantity: '5.000000 FOOBAR',
+          memo: 'Taskly',
+        },
+      },
+    ];
+    const { processed, error } = await ProtonSDK.sendTransaction(actions);
+    if (error) {
+      setErrorState(error);
+      return;
     }
-  }
+    if (!processed || !processed.id) {
+      return;
+    }
+
+    if (isPageHidden()) {
+      window.onfocus = this.loadTasksPage;
+    } else {
+      this.loadTasksPage();
+    }
+  };
+
+  loadTasksPage = () => {
+    const { history } = this.props;
+    history.push('/tasks');
+    window.onfocus = null;
+  };
 
   loadTasksPage = () => {
     const { history } = this.props;
@@ -56,10 +68,16 @@ class AccountContainer extends React.Component {
 
   render() {
     const { completedTasks } = this.state;
-    const { accountData, logout } = this.props;
+    const { accountData, logout, error } = this.props;
 
-    return(
-      <Account openConfirmModal={this.openConfirmModal} completedTasks={completedTasks} accountData={accountData} logout={logout} />
+    return (
+      <Account
+        openConfirmModal={this.openConfirmModal}
+        completedTasks={completedTasks}
+        accountData={accountData}
+        logout={logout}
+        error={error}
+      />
     );
   }
 }
