@@ -34,7 +34,7 @@ class App extends React.Component {
   };
 
   setErrorState = (error) => {
-    this.setState({ error: error.message });
+    this.setState({ error: error });
   };
 
   setLoggedInState = async (actor, permission, accountData) => {
