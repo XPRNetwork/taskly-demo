@@ -20,6 +20,12 @@ class App extends React.Component {
     this.checkIfLoggedIn();
   };
 
+  componentDidUpdate = (_, prevState) => {
+    if (prevState.error) {
+      this.setErrorState('');
+    }
+  }
+
   checkIfLoggedIn = async () => {
     const { auth, accountData, error } = await ProtonSDK.restoreSession();
     if (error) {
@@ -78,7 +84,7 @@ class App extends React.Component {
     const { history } = this.props;
     if (accountData && accountData.acc) {
       await ProtonSDK.logout();
-      this.setState({ actor: '', accountData: {}, session: '', error: '' });
+      this.setState({ actor: '', accountData: {}, session: '' });
     }
 
     history.push('/');
