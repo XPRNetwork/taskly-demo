@@ -78,7 +78,7 @@ class App extends React.Component {
     const { history } = this.props;
     if (accountData && accountData.acc) {
       await ProtonSDK.logout();
-      this.setState({ actor: '', accountData: {}, session: '' });
+      this.setState({ actor: '', accountData: {}, session: '', error: '' });
     }
 
     history.push('/');
