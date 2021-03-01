@@ -20,6 +20,12 @@ class App extends React.Component {
     this.checkIfLoggedIn();
   };
 
+  componentDidUpdate = (_, prevState) => {
+    if (prevState.error) {
+      this.setErrorState('');
+    }
+  }
+
   checkIfLoggedIn = async () => {
     const { auth, accountData, error } = await ProtonSDK.restoreSession();
     if (error) {
@@ -34,7 +40,7 @@ class App extends React.Component {
   };
 
   setErrorState = (error) => {
-    this.setState({ error: error.toString() });
+    this.setState({ error });
   };
 
   setLoggedInState = async (actor, permission, accountData) => {
