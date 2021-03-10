@@ -1,7 +1,8 @@
 # Proton Taskly Demo
 This demo shows the practical usage and integration of the [Proton Web SDK](https://www.npmjs.com/package/@proton/web-sdk) with a simple web application. 
 
-To see the React Native version of this demo using the [Proton React Native SDK](https://www.npmjs.com/package/@proton/react-native-sdk)
+To see the React Native version of this demo using the [Proton React Native SDK](https://www.npmjs.com/package/@proton/react-native-sdk), check out the Github repo [here](https://github.com/ProtonProtocol/taskly-demo-react-native).
+
 Please note that this is not a real web application. The only portions of this app that work are the authentication and transactions with Proton Wallet. You may view the live version of this demo (which uses Protonchain mainnet) at [Proton Taskly Demo](https://taskly.protonchain.com).
 
 ## To build and run locally
