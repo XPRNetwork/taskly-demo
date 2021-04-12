@@ -18,7 +18,9 @@ spec:
       - name: taskly-demo
         image: gcr.io/proton-wallet/proton-taskly-demo
         ports:
-        - containerPort: 3000
+          - name: http
+            containerPort: 3000
+            protocol: TCP
         livenessProbe:
           httpGet:
             path: /
