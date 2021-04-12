@@ -23,9 +23,11 @@ spec:
             protocol: TCP
         livenessProbe:
           httpGet:
+            host:
             path: /
             port: http
         readinessProbe:
           httpGet:
+            host:
             path: /
             port: http
